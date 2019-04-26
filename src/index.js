@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import './style/index.css';
+import './style/index.less';
 
 function createdomElement(){
 	let dom = document.createElement('div');

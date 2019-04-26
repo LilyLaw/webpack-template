@@ -4,12 +4,19 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "autoprefixer": "^9.5.1",
     "css-loader": "^2.1.1",
+    "less-loader": "^4.1.0",
+    "postcss-loader": "^3.0.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1"
   },
+  "scripts": {
+    "build": "npx webpack"
+  },
   "dependencies": {
+    "less": "^3.9.0",
     "lodash": "^4.17.11"
   }
 }
