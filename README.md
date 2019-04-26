@@ -6,7 +6,7 @@
 
 	将css写进一对```<style>```标签里，再通过JavaScript脚本把这个标签注入到html页面，如下图
 	
-	![style-loader的作用](https://github.com/LilyLaw/webpack-template/blob/master/img/style-loader.png?raw=true)
+	![style-loader的作用](https://github.com/LilyLaw/webpack-template/blob/master/src/img/style-loader.png?raw=true)
 	
 - [css-loader](https://webpack.js.org/loaders/css-loader)
 
