@@ -25,6 +25,12 @@
 - [UglifyJsPlugin](https://webpack.js.org/plugins/uglifyjs-webpack-plugin)
 	js压缩插件
 
+- [HtmlWebpackPlugin](https://webpack.js.org/plugins/html-webpack-plugin/#root)
+	把打包后的 CSS 或者 JS 文件的引用直接注入到 HTML 模板中（动态的添加```link``` , ```script``` ,不再是将整个文件注入到html中），这样就不用每次手动修改文件引用了（尤其是文件名中有哈希值的时候）。
+
+- [CleanWebpackPlugin](https://webpack.js.org/guides/output-management/#cleaning-up-the-dist-folder)
+	每一次打包的时候，先将上一次打包的文件清理掉，放置过期无用文件堆积
+
 **注意**
 1. loader如果是一个数组，则调用顺序是从后往前。 比如 处理less用到了 less-loader，css-loader，style-loader，因此正确写法应该像下面：
 
@@ -37,5 +43,4 @@
 
 2. js压缩插件```uglifyjs-webpack-plugin```默认无法压缩ES6语法的js代码，因此需要babel来预先解析成ES5的语法。否则会报错
 
-> <font color=#00ffff>null</font> ERROR in main.js from UglifyJs
-Unexpected token: name «domsss», expected: punc «;» [./src/index.js:5,0][main.js:17207,5]</font>
+> <font color=#00ffff>ERROR in main.js from UglifyJs  Unexpected token: name «domsss», expected: punc «;» [./src/index.js:5,0][main.js:17207,5]</font>

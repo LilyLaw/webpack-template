@@ -1,14 +1,16 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const devMode = process.env.NODE_ENV !== 'production';	// 判断当前环境是 开发环境还是部署环境
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const path = require('path'),
+	MiniCssExtractPlugin = require('mini-css-extract-plugin'),
+	devMode = process.env.NODE_ENV !== 'production',	// 判断当前环境是 开发环境还是部署环境
+	OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
+	UglifyJsPlugin = require('uglifyjs-webpack-plugin'),
+	HtmlWebpackPlugin = require('html-webpack-plugin'),
+	CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
 	entry:'./src/index.js',
 	mode:'production',
 	output:{
-		filename:'main.js',
+		filename:'main.[hash].js',
 		path:path.resolve(__dirname,'dist')
 	},
 	module:{
@@ -65,6 +67,20 @@ module.exports = {
 		]
 	},
 	plugins:[
+		new CleanWebpackPlugin(),
+		new HtmlWebpackPlugin({
+			title : 'webpack开发框架',
+			filename : 'index.html',
+			template : path.resolve(__dirname,'src/index.html'),
+			minify : {
+				collapseWhitespace: true,
+				removeComments: true,
+				removeRedundantAttributes: true,
+				removeScriptTypeAttributes: true,
+				removeStyleLinkTypeAttributes: true,
+				useShortDoctype: true
+			}
+		}),
 		new MiniCssExtractPlugin({
 			filename: '[name].[hash].css',
 			chunkFilename: '[id].[hash].css'
