@@ -2,9 +2,9 @@ import _ from 'lodash';
 import './style/index.less';
 
 function createdomElement(){
-	let dom = document.createElement('div');
+	let domsss = document.createElement('div');
 	dom.innerHTML = _.join(['hello','world'],'');
-	return dom;
+	return dom
 }
 
 document.body.appendChild(createdomElement());

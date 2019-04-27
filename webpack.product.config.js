@@ -1,9 +1,12 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const devMode = process.env.NODE_ENV !== 'production';	// 判断当前环境是 开发环境还是部署环境
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
 	entry:'./src/index.js',
-	mode:'development',
+	mode:'production',
 	output:{
 		filename:'main.js',
 		path:path.resolve(__dirname,'dist')
@@ -11,14 +14,18 @@ module.exports = {
 	module:{
 		rules:[
 			{
+				test:/\.js$/,
+				use:{
+					loader:'babel-loader',
+					options:{
+						presets: ['@babel/preset-env']
+					}
+				}
+			},
+			{
 				test:/\.css$/,
 				use:[
-					{
-						loader:'style-loader',
-						options:{
-							sourceMap:true
-						}
-					},
+					MiniCssExtractPlugin.loader,
 					{
 						loader:'css-loader',
 						options:{
@@ -30,12 +37,7 @@ module.exports = {
 			{
 				test:/\.less$/,
 				use:[
-					{
-						loader:'style-loader',
-						options:{
-							sourceMap:true
-						}
-					},
+					MiniCssExtractPlugin.loader,
 					{
 						loader:'css-loader',
 						options:{
@@ -61,5 +63,20 @@ module.exports = {
 				]
 			}
 		]
+	},
+	plugins:[
+		new MiniCssExtractPlugin({
+			filename: '[name].[hash].css',
+			chunkFilename: '[id].[hash].css'
+		})
+	],
+	optimization: {
+	    minimizer: [
+	    	new UglifyJsPlugin({
+	    		cache: true,
+	    		sourceMap: true
+	    	}),	// 压缩js
+	    	new OptimizeCSSAssetsPlugin({}) // 压缩css
+	    ]
 	}
 }
