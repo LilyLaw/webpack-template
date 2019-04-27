@@ -1,12 +1,13 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path')
+	HtmlWebpackPlugin = require('html-webpack-plugin'),
+	CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
 	entry:'./src/index.js',
 	mode:'development',
 	output:{
 		filename:'main.js',
-		path:path.resolve(__dirname,'dist')
+		path:path.resolve(__dirname,'build')
 	},
 	module:{
 		rules:[
@@ -59,7 +60,51 @@ module.exports = {
 						}
 					}
 				]
+			},
+			{
+				test: /\.(png|jpg|gif|svg|jpeg)$/,
+				use:[
+					'file-loader',
+					{
+						loader: 'image-webpack-loader',
+						options: {
+							mozjpeg: {
+								progressive: true,
+								quality: 65
+							},
+							optipng: {
+								enabled: false,
+							},
+							pngquant: {
+								quality: '65-90',
+								speed: 4
+							},
+							gifsicle: {
+								interlaced: false,
+							},
+							webp: {
+								quality: 75
+							}
+						}
+					}
+				]
 			}
 		]
-	}
+	},
+	plugins:[
+		new CleanWebpackPlugin(),
+		new HtmlWebpackPlugin({
+			title : 'webpack开发框架',
+			filename : 'index.html',
+			template : path.resolve(__dirname,'src/index.html'),
+			minify : {
+				collapseWhitespace: true,
+				removeComments: true,
+				removeRedundantAttributes: true,
+				removeScriptTypeAttributes: true,
+				removeStyleLinkTypeAttributes: true,
+				useShortDoctype: true
+			}
+		})
+	],
 }
