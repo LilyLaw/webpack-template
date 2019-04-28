@@ -7,4 +7,6 @@ function createdomElement(){
 	return dom;
 }
 
+console.log('hello1111111111111dsfsfew ~~~');
+
 document.body.appendChild(createdomElement());

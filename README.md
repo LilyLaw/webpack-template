@@ -40,7 +40,7 @@
 
 	webpack默认只能处理js文件，对于```.png```,```jpg```,```jpeg```等格式的图片或其他文件是无法识别的，会报错。为了可以使用这些文件，需要用```file-loader```解析。
 
--[image-webpack-loader](https://github.com/tcoopman/image-webpack-loader#image-webpack-loader)
+- [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader#image-webpack-loader)
 
 	压缩优化图片
 
