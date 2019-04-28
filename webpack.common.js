@@ -1,65 +1,20 @@
-const path = require('path')
+const path = require('path'),
+	UglifyJsPlugin = require('uglifyjs-webpack-plugin'),
 	HtmlWebpackPlugin = require('html-webpack-plugin'),
 	CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
 	entry:'./src/index.js',
-	mode:'development',
-	output:{
-		filename:'main.js',
-		path:path.resolve(__dirname,'build')
-	},
 	module:{
 		rules:[
 			{
-				test:/\.css$/,
-				use:[
-					{
-						loader:'style-loader',
-						options:{
-							sourceMap:true
-						}
-					},
-					{
-						loader:'css-loader',
-						options:{
-							sourceMap:true
-						}
+				test:/\.js$/,
+				use:{
+					loader:'babel-loader',
+					options:{
+						presets: ['@babel/preset-env']
 					}
-				]
-			},
-			{
-				test:/\.less$/,
-				use:[
-					{
-						loader:'style-loader',
-						options:{
-							sourceMap:true
-						}
-					},
-					{
-						loader:'css-loader',
-						options:{
-							sourceMap:true
-						}
-					},
-					{
-						loader: 'postcss-loader',
-						options: {
-							ident: 'postcss',
-							sourceMap: true,
-							plugins: loader => [
-								require('autoprefixer')({ browsers: ['> 0.15% in CN'] }) // 添加前缀
-							]
-						}
-					},
-					{
-						loader:'less-loader',
-						options:{
-							sourceMap:true
-						}
-					}
-				]
+				}
 			},
 			{
 				test: /\.(png|jpg|gif|svg|jpeg)$/,
@@ -99,7 +54,7 @@ module.exports = {
 	plugins:[
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
-			title : '手动搭建webpack开发框架',
+			title : 'webpack开发框架',
 			filename : 'index.html',
 			template : path.resolve(__dirname,'src/index.html'),
 			minify : {
@@ -111,5 +66,5 @@ module.exports = {
 				useShortDoctype: true
 			}
 		})
-	],
+	]
 }
