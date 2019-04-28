@@ -9,12 +9,22 @@ module.exports = {
 		rules:[
 			{
 				test:/\.js$/,
-				use:{
-					loader:'babel-loader',
-					options:{
-						presets: ['@babel/preset-env']
+				exclude: /(node_modules)/,
+				use:[
+					{
+						loader:'babel-loader',
+						options:{
+							presets: ['@babel/preset-env']
+						}
+					},
+					{
+						loader:'eslint-loader',
+						options:{
+							fix: true,
+							cache: true
+						}
 					}
-				}
+				]
 			},
 			{
 				test: /\.(png|jpg|gif|svg|jpeg)$/,
