@@ -64,7 +64,12 @@ module.exports = {
 			{
 				test: /\.(png|jpg|gif|svg|jpeg)$/,
 				use:[
-					'file-loader',
+					{
+						loader: 'url-loader',
+						options: {
+							limit : 10000
+						}
+					},
 					{
 						loader: 'image-webpack-loader',
 						options: {
@@ -94,7 +99,7 @@ module.exports = {
 	plugins:[
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
-			title : 'webpack开发框架',
+			title : '手动搭建webpack开发框架',
 			filename : 'index.html',
 			template : path.resolve(__dirname,'src/index.html'),
 			minify : {
