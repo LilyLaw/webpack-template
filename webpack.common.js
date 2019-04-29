@@ -5,6 +5,13 @@ const path = require('path'),
 
 module.exports = {
 	entry:'./src/index.js',
+	resolve: {
+		extensions:['.js','jsx','.json'],
+		alias: {
+			'@': path.resolve(__dirname, 'src/'),
+			'img': path.resolve(__dirname, 'assets/img/'),
+		}
+	},
 	module:{
 		rules:[
 			{
