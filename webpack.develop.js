@@ -1,7 +1,8 @@
 const path = require('path')
 	merge = require('webpack-merge'),
 	commonConfig = require('./webpack.common.js'),
-	webpack = require('webpack');
+	webpack = require('webpack'),
+	BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 let devConfig = {
 	mode:'development',
@@ -90,10 +91,11 @@ let devConfig = {
 			aggregateTimeout: 300 // 默认值，当第一个文件更改，会在重新构建前增加延迟
 		}
 	},
-	// plugins: [
-	//     new webpack.NamedModulesPlugin(),  // 更容易查看(patch)的依赖
-	//     new webpack.HotModuleReplacementPlugin()  // 替换插件
- //    ],
+	plugins: [
+		new BundleAnalyzerPlugin()
+	    // new webpack.NamedModulesPlugin(),  // 更容易查看(patch)的依赖
+	    // new webpack.HotModuleReplacementPlugin()  // 替换插件
+    ],
 }
 
 module.exports = merge(commonConfig , devConfig);

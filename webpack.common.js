@@ -12,6 +12,9 @@ module.exports = {
 			'img': path.resolve(__dirname, 'assets/img/'),
 		}
 	},
+	// externals: {
+	// 	lodash: '_'
+	// },
 	module:{
 		rules:[
 			{
