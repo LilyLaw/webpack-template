@@ -1,5 +1,7 @@
 ## 整体架构
 
+该框架将开发模式和生产模式下的公共配置提取出来,通过[webpack-merge](https://www.npmjs.com/package/webpack-merge)来整合，减少代码冗余
+
 ### css相关
 
 - [style-loader](https://webpack.js.org/loaders/style-loader)
@@ -38,6 +40,10 @@
 
 	目前并非全部浏览器都会支持babel语法,所以在```webpack```环境中需要将```babel```语法转换为浏览器可识别的js语法,```babel-loader```就是来做这个的。
 
+- [eslint-loader](https://webpack.js.org/loaders/eslint-loader/#root)
+
+	基于webpack的js语法检测工具，如果有语法错误程序必须先将问题解决否则无法运行
+
 - [UglifyJsPlugin](https://webpack.js.org/plugins/uglifyjs-webpack-plugin)
 
 	js压缩插件
@@ -48,15 +54,16 @@
 
 ### 非js文件相关
 
-- [file-loader](https://webpack.js.org/loaders/file-loader/)
+- [url-loader](https://webpack.js.org/loaders/url-loader/)
 
-	webpack默认只能处理js文件，对于```.png```,```jpg```,```jpeg```等格式的图片或其他文件是无法识别的，会报错。为了可以使用这些文件，需要用```file-loader```解析。
+	webpack默认只能处理js文件，对于```.png```,```jpg```,```jpeg```等格式的图片或其他文件是无法识别的，会报错。为了可以使用这些文件，需要用```url-loader```解析。
+	若文件小于设置的体积，可转换为base64编码格式。
+
+	**注意** ```url-loader``` 内部已集成了```file-loader```,所以如果使用```url-loader```就不必再用```file-loader```
 
 - [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader#image-webpack-loader)
 
 	压缩图片
-
-- []()
 
 ### 其他
 
@@ -68,15 +75,9 @@
 
 	每一次打包的时候，先将上一次打包的文件清理掉，放置过期无用文件堆积
 
+- [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)
 
-
-
-
-
-
-
-
-
+	分析你的代码，并计算各个依赖在使用中的大小，最后生成一个分析图，非常直观，让你可以知道哪部分该优化了。
 
 
 
@@ -87,6 +88,6 @@
    ```javascript
 	{
 		test:/\.less$/,
-		loader:['style-loader','css-loader','less-loader']
+		use:['style-loader','css-loader','less-loader']
 	}
    ```
