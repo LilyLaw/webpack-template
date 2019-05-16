@@ -30,10 +30,8 @@
     "webpack-merge": "^4.2.1"
   },
   "scripts": {
-    "start": "npx webpack-dev-server --config webpack.develop.js",
-    "build": "npx webpack --config webpack.develop.js",
-    "watch": "npx webpack --watch --config webpack.develop.js",
-    "dist": "npx webpack --config webpack.product.js"
+    "start": "webpack-dev-server --config webpack.develop.js",
+    "dist": "webpack --config webpack.product.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
